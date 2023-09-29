@@ -9,8 +9,14 @@ jobs:
     steps:
       - name: print a command
         run: echo "Hello World!"
+      - name: print multiline
+        run: |
+          node -v
+          npm -v
+          
 
-        
+
+
 
   
     
