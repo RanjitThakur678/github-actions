@@ -22,4 +22,12 @@ jobs:
       - name: print macos system configuration 
         run: system_profiler SPSoftwareDataType SPHardwareDataType
 
+      - name: Display working directory
+        run: |
+          pwd
+          ls -al  
+          echo $GITHUB_SHA
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_WORKSPACE
+
       
