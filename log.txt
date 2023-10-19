@@ -1,0 +1,13 @@
+diff --git a/.github/workflows/tag-release.yaml b/.github/workflows/tag-release.yaml
+index 90817ca..7e15b9a 100644
+--- a/.github/workflows/tag-release.yaml
++++ b/.github/workflows/tag-release.yaml
+@@ -26,5 +26,4 @@ jobs:
+         run: |
+           echo "Got tag name ${{ steps.release.outputs.tag_name }}"
+           echo "Got release version ${{ steps.release.outputs.version }}"
+-          echo "Upload release artifacts to ${{ steps.release.outputs.upload_url }}"
+-          echo "Its a test modification "
+\ No newline at end of file
++          echo "Upload release artifacts to ${{ steps.release.outputs.upload_url }}"
+\ No newline at end of file

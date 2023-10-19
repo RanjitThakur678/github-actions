@@ -27,4 +27,6 @@ jobs:
           echo "Got tag name ${{ steps.release.outputs.tag_name }}"
           echo "Got release version ${{ steps.release.outputs.version }}"
           echo "Upload release artifacts to ${{ steps.release.outputs.upload_url }}"
-          echo "Its a test modification "
+          echo "Its a test modification nothing new "
+          ### adding a line but not staging it
+          echo " adding a line "
