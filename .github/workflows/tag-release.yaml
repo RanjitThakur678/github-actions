@@ -30,3 +30,4 @@ jobs:
           echo "Its a test modification nothing new "
           ### adding a line but not staging it
           echo " adding a line "
+          echo " just  just checking"
