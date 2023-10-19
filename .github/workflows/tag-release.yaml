@@ -31,4 +31,4 @@ jobs:
           ### adding a line but not staging it
           echo " adding a line "
           echo " just  just checking commit"
-          echo " it is a new commit"
+         
