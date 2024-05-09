@@ -21,6 +21,10 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        
+      - name: Set up environment variables
+        env:
+          INPUT_BUMP_VERSION_SCHEME: "semantic"
 
       - name: Create Release
         id: create_release
