@@ -1,7 +1,9 @@
 name: "Deployment Of Node Project"
 
 on: 
+  workflow_dispatch:
   push:
+  
 
 
 jobs:
@@ -19,7 +21,7 @@ jobs:
 
   Test:
     needs: Lint
-    runs-on: ubuntu_latest
+    runs-on: ubuntu-latest
     steps:
 
       - name: Code checkout
