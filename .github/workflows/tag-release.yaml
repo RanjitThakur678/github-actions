@@ -1,9 +1,9 @@
 name: Release Tag
 
 on:
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: rymndhng/release-on-push-action@master
         with:
-          tag_prefix: "v"
+          tag_prefix: "v*"
           
 
       - name: Check Output Parameters
