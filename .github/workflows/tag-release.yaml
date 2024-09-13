@@ -34,10 +34,15 @@ jobs:
           npm install
           npm pack
 
-      - name: Archive Site Content
-        uses: thedoctor0/zip-release@main
-        with: 
-          filename: site.zip
+      # - name: Archive Site Content
+      #   uses: thedoctor0/zip-release@main
+      #   with: 
+      #     filename: site.zip
+
+      - name: Create ZIP archive
+        run: |
+          mkdir -p release
+          zip -r release/release.zip . -x 'node_modules/*' -x '.git/*' -x 'release/*' -x 'tests/*' 
           
       - name: Create GitHub Release
         id: create_release
@@ -59,8 +64,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./site.zip # Update with correct file path
+          asset_path: release/release.zip # Update with correct file path
           asset_name: site-v${{ github.run_number }}    # Update with correct file name
           asset_content_type: application/zip
+
+
+    
+
 
 
