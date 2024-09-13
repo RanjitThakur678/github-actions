@@ -5,15 +5,15 @@ on:
     branches:
       - feat/test
 
-      
+
 
 jobs:
   get-build-number:
     runs-on: ubuntu-latest
     steps:
     - name: Output Run ID
-      run: echo ${{ github.run_id }}
+      run: echo Run Id is ${{ github.run_id }}
     - name: Output Run Number
-      run: echo ${{ github.run_number }}
+      run: echo Run number is ${{ github.run_number }}
     - name: Output Run Attempt
-      run: echo ${{ github.run_attempt }}
+      run: echo Run Attempt is ${{ github.run_attempt }}
