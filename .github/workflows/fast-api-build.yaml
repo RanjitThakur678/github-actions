@@ -1,0 +1,40 @@
+name: Python CI
+
+on:
+  push:
+
+jobs:
+  Build_fastapi:
+
+    # Ideally, you'll pin this to a specific version of ubuntu like
+    # "ubuntu-22.04", but "ubuntu-latest" will ensure that you'll always pull
+    # the latest version that GitHub supports:
+    # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources
+    runs-on: ubuntu-latest
+
+    steps:
+
+    # Check out the code using v4 of the "actions/checkout" action:
+    # https://github.com/actions/checkout
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    # Set the environment up to use Python. Here, I'm explicitly setting
+    # the Python version to 3.10, but you'll probably want to run this against
+    # multiple different versions. More on that later on.
+    # https://github.com/actions/setup-python
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    # Install Python dependencies. This step doesn't run any actions but rather
+    # executes a couple of shell commands.
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip install fastapi
+        pip install uvicorn    
+
+
+        
