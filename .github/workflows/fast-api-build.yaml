@@ -45,7 +45,7 @@ jobs:
         echo files are zipped
 
     - name: Publish application
-      uses: actions/upload-artifact@3
+      uses: actions/upload-artifact@v3
       with:
         name: fastapi-app-package
         path: fastapi-app.zip
