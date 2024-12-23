@@ -36,11 +36,21 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         pip3 install -r requirements.txt
-
-    - name: Run the application
+    - name: zip the application
       shell: bash
       run: |
-        uvicorn main:app 
+        echo zipping the files
+        ls -l
+        zip -r fastapi-app.zip .
+        echo files are zipped
+
+    - name: Publish application
+      uses: actions/upload-artifact@3
+      with:
+        name: fastapi-app-package
+        path: fastapi-app.zip
+
+
 
 
 
