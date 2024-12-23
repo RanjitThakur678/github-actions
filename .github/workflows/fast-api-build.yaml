@@ -40,7 +40,7 @@ jobs:
     - name: Run the application
       shell: bash
       run: |
-        uvicorn main:app --reload
+        uvicorn main:app 
 
 
 
