@@ -17,7 +17,7 @@ on:
 
 jobs:
   call_reusable:
-    uses: .github/workflows/reusable-ci.yml@main
+    uses: ./.github/workflows/reusable-ci.yml
     with:
       language: ${{ github.event.inputs.language }}
       version: ${{ github.event.inputs.version }}
