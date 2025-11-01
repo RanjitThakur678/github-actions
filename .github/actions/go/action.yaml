@@ -1,0 +1,18 @@
+name: Go CI Action
+description: "Reusable Go build and test logic"
+
+inputs:
+  go-version:
+    required: false
+    default: "1.22"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-go@v5
+      with:
+        go-version: ${{ inputs.go-version }}
+    - run: go mod tidy
+    - run: go build ./...
+    - run: go test ./...
