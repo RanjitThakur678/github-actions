@@ -1,0 +1,36 @@
+name: Reusable Multi-language CI Workflow
+
+on:
+  workflow_call:
+    inputs:
+      language:
+        required: true
+        type: string
+        description: "Choose the language (python|node|go)"
+      version:
+        required: false
+        type: string
+        description: "Runtime version"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Python CI
+        if: ${{ inputs.language == 'python' }}
+        uses: ./.github/actions/python
+        with:
+          python-version: ${{ inputs.version || '3.11' }}
+
+      - name: Run Node CI
+        if: ${{ inputs.language == 'node' }}
+        uses: ./.github/actions/node
+        with:
+          node-version: ${{ inputs.version || '20' }}
+
+      - name: Run Go CI
+        if: ${{ inputs.language == 'go' }}
+        uses: ./.github/actions/go
+        with:
+          go-version: ${{ inputs.version || '1.22' }}
+v
