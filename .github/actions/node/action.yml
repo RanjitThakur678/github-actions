@@ -22,11 +22,11 @@ runs:
       shell: bash
 
     - name: Lint code
-      run: npx eslint . || true  # non-blocking lint
+      run: npx eslint . || true
       shell: bash
 
     - name: Run tests
-      run: npm test -- --json --outputFile=test-results.json
+      run: npx vitest run --reporter=json --outputFile=test-results.json
       shell: bash
 
     - name: Upload test results
@@ -35,4 +35,3 @@ runs:
       with:
         name: node-test-results
         path: test-results.json
-
