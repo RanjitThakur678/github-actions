@@ -1,0 +1,27 @@
+name: CI Status Callback
+
+on:
+  workflow_run:
+    workflows: ["Main CI Pipeline"]  # exact name from main.yaml
+    types:
+      - completed  # fires on both success and failure
+
+jobs:
+  report_status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print status of previous workflow
+        run: |
+          echo "🔁 Triggered after Main CI Pipeline finished."
+          echo "Status: ${{ github.event.workflow_run.conclusion }}"
+          echo "Run ID: ${{ github.event.workflow_run.id }}"
+          echo "URL: ${{ github.event.workflow_run.html_url }}"
+
+      # Example: handle success or failure
+      - name: Take action based on status
+        run: |
+          if [ "${{ github.event.workflow_run.conclusion }}" = "success" ]; then
+            echo "✅ Main workflow succeeded. Proceeding with post-steps..."
+          else
+            echo "❌ Main workflow failed. Logging failure or sending alert..."
+          fi
