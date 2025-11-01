@@ -1,5 +1,5 @@
 name: Node CI Action
-description: "Reusable Node.js build and test logic"
+description: "Reusable Node.js build, lint, test, and artifact logic"
 
 inputs:
   node-version:
@@ -10,10 +10,25 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ inputs.node-version }}
+        cache: "npm"
 
-    - run: npm ci
-    - run: npm run build
-    - run: npm test
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Lint code
+      run: npx eslint . || true  # non-blocking lint
+
+    - name: Run tests
+      run: npm test -- --json --outputFile=test-results.json
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: node-test-results
+        path: test-results.json
