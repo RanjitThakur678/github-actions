@@ -1,5 +1,5 @@
 name: Go CI Action
-description: "Reusable Go build and test logic"
+description: "Reusable Go build, lint, test, and artifact logic"
 
 inputs:
   go-version:
@@ -10,9 +10,25 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-go@v5
+
+    - name: Setup Go
+      uses: actions/setup-go@v5
       with:
         go-version: ${{ inputs.go-version }}
-    - run: go mod tidy
-    - run: go build ./...
-    - run: go test ./...
+        cache-dependency-path: go.sum
+
+    - name: Lint code
+      run: go vet ./...
+
+    - name: Build
+      run: go build ./...
+
+    - name: Run tests
+      run: go test -v ./... -json > test-results.json
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: go-test-results
+        path: test-results.json
