@@ -1,0 +1,23 @@
+name: Main CI Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      language:
+        description: "Select the language"
+        required: true
+        type: choice
+        options:
+          - python
+          - node
+          - go
+      version:
+        description: "Optional runtime version"
+        required: false
+
+jobs:
+  call_reusable:
+    uses: ./.github/workflows/reusable-ci.yml
+    with:
+      language: ${{ github.event.inputs.language }}
+      version: ${{ github.event.inputs.version }}
