@@ -19,12 +19,15 @@ runs:
 
     - name: Lint code
       run: go vet ./...
+      shell: bash
 
     - name: Build
       run: go build ./...
+      shell: bash
 
     - name: Run tests
       run: go test -v ./... -json > test-results.json
+      shell: bash
 
     - name: Upload test results
       if: always()
@@ -32,3 +35,4 @@ runs:
       with:
         name: go-test-results
         path: test-results.json
+
