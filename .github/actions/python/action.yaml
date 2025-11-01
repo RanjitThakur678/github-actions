@@ -1,0 +1,40 @@
+name: Python CI Action
+description: "Reusable Python build, lint, test, and artifact logic"
+
+inputs:
+  python-version:
+    description: "Python version"
+    required: false
+    default: "3.11"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Cache dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Lint code
+      run: pip install flake8 && flake8 .
+
+    - name: Run tests
+      run: pytest --junitxml=test-results.xml
+
+    - name: Upload test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: python-test-results
+        path: test-results.xml
