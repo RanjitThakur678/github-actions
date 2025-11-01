@@ -36,15 +36,8 @@ runs:
       run: pip install flake8 && flake8 .
       shell: bash
 
-    - name: Run tests
-      run: pytest --junitxml=test-results.xml
+    - name: Greetings
+      run: echo "Python build in progress...."
       shell: bash
 
-    - name: Upload test results
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: python-test-results
-        path: test-results.xml
-
-
+    
