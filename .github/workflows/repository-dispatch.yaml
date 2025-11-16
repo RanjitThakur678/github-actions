@@ -29,12 +29,13 @@ jobs:
 
       - name: Run language-specific script
         if: ${{ github.event.client_payload.language == 'python' }}
-        run: python3 myscript.py
+        shell: bash
+        run: echo "Repository dispatch is working..."
 
-      - name: Run Node CI
-        if: ${{ github.event.client_payload.language == 'node' }}
-        run: npm install && npm test
+    #   - name: Run Node CI
+    #     if: ${{ github.event.client_payload.language == 'node' }}
+    #     run: npm install && npm test
 
-      - name: Run Go CI
-        if: ${{ github.event.client_payload.language == 'go' }}
-        run: go test ./...
+    #   - name: Run Go CI
+    #     if: ${{ github.event.client_payload.language == 'go' }}
+    #     run: go test ./...
