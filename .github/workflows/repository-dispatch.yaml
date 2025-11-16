@@ -1,0 +1,40 @@
+name: Dispatch Runner
+
+on:
+  repository_dispatch:
+    types: [trigger-ci]
+
+jobs:
+  run-dispatch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Show received payload
+        run: |
+          echo "Branch: ${{ github.event.client_payload.branch }}"
+          echo "Language: ${{ github.event.client_payload.language }}"
+          echo "Version: ${{ github.event.client_payload.version }}"
+          echo "Message: ${{ github.event.client_payload.message }}"
+
+      - name: Checkout target branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.client_payload.branch }}
+
+      - name: Run CI task
+        run: |
+          echo "Running CI for branch: ${{ github.event.client_payload.branch }}"
+          echo "Language: ${{ github.event.client_payload.language }}"
+          echo "Version: ${{ github.event.client_payload.version }}"
+
+      - name: Run language-specific script
+        if: ${{ github.event.client_payload.language == 'python' }}
+        run: python3 myscript.py
+
+      - name: Run Node CI
+        if: ${{ github.event.client_payload.language == 'node' }}
+        run: npm install && npm test
+
+      - name: Run Go CI
+        if: ${{ github.event.client_payload.language == 'go' }}
+        run: go test ./...
