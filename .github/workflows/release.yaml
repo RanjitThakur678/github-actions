@@ -1,6 +1,6 @@
 name: Auto Release
 
-on:
+# on:
   # push:
   #   tags:
   #     - 'v*' # Trigger on tags starting with 'v'

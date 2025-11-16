@@ -33,4 +33,4 @@ jobs:
         uses: ./.github/actions/go
         with:
           go-version: ${{ inputs.version || '1.22' }}
-v
+
