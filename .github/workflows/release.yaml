@@ -1,9 +1,11 @@
 name: Auto Release
 
-# on:
-  # push:
-  #   tags:
-  #     - 'v*' # Trigger on tags starting with 'v'
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
 
 jobs:
   build:
